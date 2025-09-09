@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-export default function Home() {
+export default function SignUp() {
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Video Background */}
@@ -22,13 +22,22 @@ export default function Home() {
       {/* Pink gradient blob */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-pink-500 via-purple-500 to-transparent rounded-full blur-3xl opacity-30"></div>
       
-      {/* Sign In Form */}
+      {/* Sign Up Form */}
       <div className="relative z-10 w-full max-w-md mx-auto px-6">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-8">Sign In.</h1>
+          <h1 className="text-4xl font-bold text-white mb-8">Sign Up.</h1>
         </div>
         
         <form className="space-y-6">
+          {/* Full Name Input */}
+          <div>
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full px-6 py-4 rounded-2xl bg-black/20 backdrop-blur-sm border-2 border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-white/40 focus:bg-black/30 transition-all"
+            />
+          </div>
+          
           {/* Email Input */}
           <div>
             <input
@@ -43,6 +52,15 @@ export default function Home() {
             <input
               type="password"
               placeholder="Password"
+              className="w-full px-6 py-4 rounded-2xl bg-black/20 backdrop-blur-sm border-2 border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-white/40 focus:bg-black/30 transition-all"
+            />
+          </div>
+          
+          {/* Confirm Password Input */}
+          <div>
+            <input
+              type="password"
+              placeholder="Confirm Password"
               className="w-full px-6 py-4 rounded-2xl bg-black/20 backdrop-blur-sm border-2 border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-white/40 focus:bg-black/30 transition-all"
             />
           </div>
@@ -78,23 +96,23 @@ export default function Home() {
             </button>
           </div>
           
-          {/* Sign In Button */}
+          {/* Sign Up Button */}
           <button
             type="submit"
             className="w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 backdrop-blur-sm border-2 border-purple-300/20 text-white font-semibold text-lg hover:from-purple-500/20 hover:via-pink-500/20 hover:to-purple-500/20 hover:border-purple-300/40 transition-all duration-300 mt-8 shadow-lg"
           >
-            Sign In.
+            Sign Up.
           </button>
         </form>
         
-        {/* Sign Up Link */}
+        {/* Sign In Link */}
         <div className="text-center mt-6">
-          <span className="text-gray-300">don't have an account? </span>
-          <Link href="/signup" className="text-white font-semibold hover:underline">
-            Create a account
+          <span className="text-gray-300">already have an account? </span>
+          <Link href="/signin" className="text-white font-semibold hover:underline">
+            Sign In
           </Link>
         </div>
       </div>
     </div>
   );
-}
+} 
