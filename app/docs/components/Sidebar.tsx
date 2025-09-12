@@ -1,61 +1,74 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronRight, ChevronDown } from "lucide-react";
+import sectionsData from "./sections.json";
 
-const sections = [
-  {
-    title: "Getting Started",
-    items: ["Introduction", "Quickstart", "Lorem Ipsum", "Lorem Ipsum"],
-  },
-  {
-    title: "Resources",
-    items: ["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"],
-  },
-  {
-    title: "Reach Core Concepts",
-    items: ["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"],
-  },
-];
-
-export function Sidebar() {
-  const [openSection, setOpenSection] = useState<string | null>("Getting Started");
+export function Sidebar({
+  onSelect,
+}: {
+  onSelect: (content: any) => void;
+}) {
+  const [openItem, setOpenItem] = useState<string | null>(null);
+  const [activeChild, setActiveChild] = useState<string | null>(null);
 
   return (
-    <aside className="hidden md:flex flex-col w-64 border-r border-gray-800 p-4">
-      <input
-        type="text"
-        placeholder="Search"
-        className="mb-4 w-full rounded-lg bg-gray-900 px-3 py-2 text-sm text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-      />
-
-      {sections.map((section) => (
-        <div key={section.title} className="mb-3">
-          <button
-            onClick={() => setOpenSection(openSection === section.title ? null : section.title)}
-            className="flex w-full items-center justify-between px-2 py-1 text-sm font-semibold text-gray-400 hover:text-white"
-          >
+    <aside className="w-64 bg-[#0a0020] text-gray-300 p-4 overflow-y-auto">
+      {sectionsData.sections.map((section) => (
+        <div key={section.title} className="mb-6">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
             {section.title}
-            {openSection === section.title ? (
-              <ChevronDown size={16} />
-            ) : (
-              <ChevronRight size={16} />
-            )}
-          </button>
-          {openSection === section.title && (
-            <ul className="ml-4 mt-2 space-y-1">
-              {section.items.map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="block rounded px-2 py-1 text-sm text-gray-300 hover:bg-gray-800 hover:text-white"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
+          </h3>
+
+          <ul className="space-y-1">
+            {section.items.map((item) => (
+              <li key={item.name}>
+                <button
+                  onClick={() =>
+                    item.children.length > 0 &&
+                    setOpenItem(openItem === item.name ? null : item.name)
+                  }
+                  className={`flex w-full items-center justify-between px-2 py-1 text-sm ${
+                    openItem === item.name
+                      ? "text-white font-semibold"
+                      : "hover:text-white"
+                  }`}
+                >
+                  {item.name}
+                  {item.children.length > 0 &&
+                    (openItem === item.name ? (
+                      <ChevronDown size={14} />
+                    ) : (
+                      <ChevronRight size={14} />
+                    ))}
+                </button>
+
+                {openItem === item.name && (
+                  <ul className="ml-4 mt-2 space-y-2 border-l border-gray-700 pl-4">
+                    {item.children.map((child) => (
+                      <li key={child.title}>
+                        <a
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setActiveChild(child.title);
+                            onSelect(child); // send selected child content to page
+                          }}
+                          className={`block text-sm ${
+                            activeChild === child.title
+                              ? "text-purple-400 font-medium"
+                              : "hover:text-white"
+                          }`}
+                        >
+                          {child.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       ))}
     </aside>

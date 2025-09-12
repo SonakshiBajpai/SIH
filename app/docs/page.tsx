@@ -1,12 +1,17 @@
+"use client";
+
+import { useState } from "react";
 import { Sidebar } from "./components/Sidebar";
-import { DocContent } from "./components/DocContent";
+import DocContent from "./components/DocContent";
 
 export default function DocsPage() {
+  const [selectedContent, setSelectedContent] = useState<any>(null);
+
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-[#0a0020] to-[#1a003c] text-gray-100">
-      <Sidebar />
-      <main className="flex-1 p-8 overflow-y-auto">
-        <DocContent />
+    <div className="flex min-h-screen bg-[#0a0020] text-white">
+      <Sidebar onSelect={setSelectedContent} />
+      <main className="flex-1 overflow-y-auto">
+        <DocContent content={selectedContent} />
       </main>
     </div>
   );

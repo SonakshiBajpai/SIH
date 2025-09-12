@@ -1,27 +1,36 @@
 import { CodeBlock } from "./CodeBlock";
 
-export function DocContent() {
+export default function DocContent({ content }: { content: any }) {
+  if (!content) {
+    return (
+      <div className="p-6 text-gray-400">
+        Select a topic from the sidebar to view its content.
+      </div>
+    );
+  }
+
   return (
-    <div className="prose prose-invert max-w-none">
-      <h1>Quickstart</h1>
+    <div className="p-6 space-y-4">
+      <h1 className="text-2xl font-bold text-white">{content.title}</h1>
 
-      <h2>Set up</h2>
-      <p>
-        D3 is written using ES2015 modules. Create a custom bundle using Rollup, Webpack, or your
-        preferred bundler.
-      </p>
-
-      <CodeBlock code="npm install d3" />
-
-      <p>
-        To import D3 into an ES2015 application, either import specific symbols from specific D3
-        modules, or import everything into a namespace.
-      </p>
-
-      <CodeBlock code={`import * as d3 from "d3";`} />
-
-      <h2>In Node</h2>
-      <CodeBlock code={`const d3 = require("d3");`} />
+      {content.content.map((block: any, i: number) => {
+        if (block.type === "paragraph") {
+          return (
+            <p key={i} className="text-gray-300">
+              {block.text}
+            </p>
+          );
+        }
+        if (block.type === "code") {
+          return (
+            <CodeBlock
+              key={i}
+              code={block.code}
+            />
+          );
+        }
+        return null;
+      })}
     </div>
   );
 }

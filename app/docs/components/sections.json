@@ -1,0 +1,75 @@
+{
+  "sections": [
+    {
+      "title": "Getting Started",
+      "items": [
+        {
+          "name": "Introduction",
+          "children": [
+            {
+              "title": "What is This?",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "text": "This documentation will guide you through setup and usage."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Quickstart",
+          "children": [
+            {
+              "title": "Set up",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "text": "Install the package using npm or yarn."
+                },
+                {
+                  "type": "code",
+                  "language": "bash",
+                  "code": "npm install my-library"
+                }
+              ]
+            },
+            {
+              "title": "Run Example",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "text": "Now you can run the example project."
+                },
+                {
+                  "type": "code",
+                  "language": "bash",
+                  "code": "npm run dev"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Main Concepts",
+      "items": [
+        {
+          "name": "Overview",
+          "children": [
+            {
+              "title": "Concepts",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "text": "Here we explain the main concepts."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
