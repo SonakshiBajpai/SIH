@@ -1,75 +1,9 @@
 {
-  "sections": [
-    {
-      "title": "Getting Started",
-      "items": [
-        {
-          "name": "Introduction",
-          "children": [
-            {
-              "title": "What is This?",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "text": "This documentation will guide you through setup and usage."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Quickstart",
-          "children": [
-            {
-              "title": "Set up",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "text": "Install the package using npm or yarn."
-                },
-                {
-                  "type": "code",
-                  "language": "bash",
-                  "code": "npm install my-library"
-                }
-              ]
-            },
-            {
-              "title": "Run Example",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "text": "Now you can run the example project."
-                },
-                {
-                  "type": "code",
-                  "language": "bash",
-                  "code": "npm run dev"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Main Concepts",
-      "items": [
-        {
-          "name": "Overview",
-          "children": [
-            {
-              "title": "Concepts",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "text": "Here we explain the main concepts."
-                }
-              ]
-            }
-          ]
-        }
-      ]
+  "Getting Started": {
+    "Introduction": "Welcome to the docs! This is the introduction.",
+    "Quickstart": {
+      "Set up": "D3 is written using ES2015 modules. Create a custom bundle using Rollup, Webpack, or your preferred bundler.\n\n```bash\nnpm install d3\n```\n\nTo import D3 into an ES2015 application:\n\n```js\nimport { scaleLinear } from \"d3-scale\";\nimport * as d3 from \"d3\";\n```\n\nIn Node:\n\n```js\nvar d3 = require(\"d3\");\n```",
+      "Lorem Ipsum": "Some placeholder quickstart content"
     }
-  ]
+  }
 }

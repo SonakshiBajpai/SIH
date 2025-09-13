@@ -1,76 +1,91 @@
 "use client";
-
-import { useState } from "react";
-import { ChevronRight, ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
 import sectionsData from "./sections.json";
 
-export function Sidebar({
-  onSelect,
-}: {
-  onSelect: (content: any) => void;
-}) {
-  const [openItem, setOpenItem] = useState<string | null>(null);
-  const [activeChild, setActiveChild] = useState<string | null>(null);
+export default function Sidebar({ onSelect }: { onSelect: (content: string, title: string) => void }) {
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Default expand Quickstart
+  useEffect(() => {
+    if (sectionsData["Getting Started"] && sectionsData["Getting Started"]["Quickstart"]) {
+      setOpenSections((prev) => ({ ...prev, Quickstart: true }));
+    }
+  }, []);
+
+  const handleToggle = (section: string) => {
+    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query.toLowerCase());
+  };
+
+  const filterContent = (title: string) => title.toLowerCase().includes(searchQuery);
 
   return (
-    <aside className="w-64 bg-[#0a0020] text-gray-300 p-4 overflow-y-auto">
-      {sectionsData.sections.map((section) => (
-        <div key={section.title} className="mb-6">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
-            {section.title}
-          </h3>
-
-          <ul className="space-y-1">
-            {section.items.map((item) => (
-              <li key={item.name}>
-                <button
-                  onClick={() =>
-                    item.children.length > 0 &&
-                    setOpenItem(openItem === item.name ? null : item.name)
-                  }
-                  className={`flex w-full items-center justify-between px-2 py-1 text-sm ${
-                    openItem === item.name
-                      ? "text-white font-semibold"
-                      : "hover:text-white"
-                  }`}
-                >
-                  {item.name}
-                  {item.children.length > 0 &&
-                    (openItem === item.name ? (
-                      <ChevronDown size={14} />
-                    ) : (
-                      <ChevronRight size={14} />
-                    ))}
-                </button>
-
-                {openItem === item.name && (
-                  <ul className="ml-4 mt-2 space-y-2 border-l border-gray-700 pl-4">
-                    {item.children.map((child) => (
-                      <li key={child.title}>
-                        <a
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setActiveChild(child.title);
-                            onSelect(child); // send selected child content to page
-                          }}
-                          className={`block text-sm ${
-                            activeChild === child.title
-                              ? "text-purple-400 font-medium"
-                              : "hover:text-white"
-                          }`}
-                        >
-                          {child.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
+    <div className="w-64 bg-[#0a0133] text-white h-screen p-4 overflow-y-auto">
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => handleSearch(e.target.value)}
+          className="w-full p-2 rounded-md border border-gray-700 bg-gray-900 text-white focus:outline-none"
+        />
+      </div>
+      {Object.entries(sectionsData).map(([section, content]) => (
+        <div key={section} className="mb-4">
+          <button
+            onClick={() => handleToggle(section)}
+            className="font-semibold text-lg w-full text-left"
+          >
+            {section}
+          </button>
+          {typeof content === "object" && (
+            <div className={`ml-4 mt-2 space-y-2 ${openSections[section] ? "block" : "hidden"}`}>
+              {Object.entries(content).map(([sub, subContent]) => {
+                if (!filterContent(sub) && !filterContent(section)) return null;
+                if (typeof subContent === "string") {
+                  return (
+                    <button
+                      key={sub}
+                      onClick={() => onSelect(subContent, sub)}
+                      className="block w-full text-left text-gray-300 hover:text-white"
+                    >
+                      {sub}
+                    </button>
+                  );
+                } else {
+                  return (
+                    <div key={sub}>
+                      <button
+                        onClick={() => handleToggle(sub)}
+                        className="font-medium text-md text-purple-300"
+                      >
+                        {sub}
+                      </button>
+                      <div className={`ml-4 mt-1 space-y-1 ${openSections[sub] ? "block" : "hidden"}`}>
+                        {Object.entries(subContent).map(([nested, nestedContent]) => {
+                          if (!filterContent(nested)) return null;
+                          return (
+                            <button
+                              key={nested}
+                              onClick={() => onSelect(nestedContent as string, nested)}
+                              className="block w-full text-left text-gray-400 hover:text-white"
+                            >
+                              {nested}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          )}
         </div>
       ))}
-    </aside>
+    </div>
   );
 }

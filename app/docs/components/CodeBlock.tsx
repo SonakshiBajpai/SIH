@@ -1,31 +1,28 @@
 "use client";
-
-import { Copy } from "lucide-react";
 import { useState } from "react";
+import { Copy } from "lucide-react";
 
-export function CodeBlock({ code }: { code: string }) {
+export default function CodeBlock({ code, language }: { code: string; language: string }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code);
     setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div className="relative bg-gray-900 rounded-lg overflow-hidden">
-      <pre className="p-4 text-sm text-gray-200 overflow-x-auto">
+    <div className="relative bg-[#111827] text-gray-200 rounded-md p-4 my-4 overflow-x-auto">
+      <pre className="text-sm">
         <code>{code}</code>
       </pre>
       <button
         onClick={handleCopy}
-        className="absolute top-2 right-2 rounded bg-gray-800 p-1.5 text-gray-300 hover:text-white"
+        className="absolute top-2 right-2 text-gray-400 hover:text-white"
       >
-        <Copy size={16} />
+        <Copy size={18} />
       </button>
-      {copied && (
-        <span className="absolute top-2 right-12 text-xs text-green-400">Copied!</span>
-      )}
+      {copied && <span className="absolute top-2 right-10 text-green-400 text-sm">Copied!</span>}
     </div>
   );
 }
