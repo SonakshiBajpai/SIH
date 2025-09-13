@@ -1,0 +1,9 @@
+{
+  "Getting Started": {
+    "Introduction": "Welcome to the docs! This is the introduction.",
+    "Quickstart": {
+      "Set up": "D3 is written using ES2015 modules. Create a custom bundle using Rollup, Webpack, or your preferred bundler.\n\n```bash\nnpm install d3\n```\n\nTo import D3 into an ES2015 application:\n\n```js\nimport { scaleLinear } from \"d3-scale\";\nimport * as d3 from \"d3\";\n```\n\nIn Node:\n\n```js\nvar d3 = require(\"d3\");\n```",
+      "Lorem Ipsum": "Some placeholder quickstart content"
+    }
+  }
+}

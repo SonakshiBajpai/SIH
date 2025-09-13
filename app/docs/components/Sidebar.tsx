@@ -1,63 +1,91 @@
 "use client";
+import { useState, useEffect } from "react";
+import sectionsData from "./sections.json";
 
-import { useState } from "react";
-import { ChevronDown, ChevronRight } from "lucide-react";
+export default function Sidebar({ onSelect }: { onSelect: (content: string, title: string) => void }) {
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+  const [searchQuery, setSearchQuery] = useState("");
 
-const sections = [
-  {
-    title: "Getting Started",
-    items: ["Introduction", "Quickstart", "Lorem Ipsum", "Lorem Ipsum"],
-  },
-  {
-    title: "Resources",
-    items: ["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"],
-  },
-  {
-    title: "Reach Core Concepts",
-    items: ["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"],
-  },
-];
+  // Default expand Quickstart
+  useEffect(() => {
+    if (sectionsData["Getting Started"] && sectionsData["Getting Started"]["Quickstart"]) {
+      setOpenSections((prev) => ({ ...prev, Quickstart: true }));
+    }
+  }, []);
 
-export function Sidebar() {
-  const [openSection, setOpenSection] = useState<string | null>("Getting Started");
+  const handleToggle = (section: string) => {
+    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query.toLowerCase());
+  };
+
+  const filterContent = (title: string) => title.toLowerCase().includes(searchQuery);
 
   return (
-    <aside className="hidden md:flex flex-col w-64 border-r border-gray-800 p-4">
-      <input
-        type="text"
-        placeholder="Search"
-        className="mb-4 w-full rounded-lg bg-gray-900 px-3 py-2 text-sm text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-      />
-
-      {sections.map((section) => (
-        <div key={section.title} className="mb-3">
+    <div className="w-64 bg-[#0a0133] text-white h-screen p-4 overflow-y-auto">
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => handleSearch(e.target.value)}
+          className="w-full p-2 rounded-md border border-gray-700 bg-gray-900 text-white focus:outline-none"
+        />
+      </div>
+      {Object.entries(sectionsData).map(([section, content]) => (
+        <div key={section} className="mb-4">
           <button
-            onClick={() => setOpenSection(openSection === section.title ? null : section.title)}
-            className="flex w-full items-center justify-between px-2 py-1 text-sm font-semibold text-gray-400 hover:text-white"
+            onClick={() => handleToggle(section)}
+            className="font-semibold text-lg w-full text-left"
           >
-            {section.title}
-            {openSection === section.title ? (
-              <ChevronDown size={16} />
-            ) : (
-              <ChevronRight size={16} />
-            )}
+            {section}
           </button>
-          {openSection === section.title && (
-            <ul className="ml-4 mt-2 space-y-1">
-              {section.items.map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="block rounded px-2 py-1 text-sm text-gray-300 hover:bg-gray-800 hover:text-white"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          {typeof content === "object" && (
+            <div className={`ml-4 mt-2 space-y-2 ${openSections[section] ? "block" : "hidden"}`}>
+              {Object.entries(content).map(([sub, subContent]) => {
+                if (!filterContent(sub) && !filterContent(section)) return null;
+                if (typeof subContent === "string") {
+                  return (
+                    <button
+                      key={sub}
+                      onClick={() => onSelect(subContent, sub)}
+                      className="block w-full text-left text-gray-300 hover:text-white"
+                    >
+                      {sub}
+                    </button>
+                  );
+                } else {
+                  return (
+                    <div key={sub}>
+                      <button
+                        onClick={() => handleToggle(sub)}
+                        className="font-medium text-md text-purple-300"
+                      >
+                        {sub}
+                      </button>
+                      <div className={`ml-4 mt-1 space-y-1 ${openSections[sub] ? "block" : "hidden"}`}>
+                        {Object.entries(subContent).map(([nested, nestedContent]) => {
+                          if (!filterContent(nested)) return null;
+                          return (
+                            <button
+                              key={nested}
+                              onClick={() => onSelect(nestedContent as string, nested)}
+                              className="block w-full text-left text-gray-400 hover:text-white"
+                            >
+                              {nested}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                }
+              })}
+            </div>
           )}
         </div>
       ))}
-    </aside>
+    </div>
   );
 }

@@ -1,27 +1,28 @@
-import { CodeBlock } from "./CodeBlock";
+"use client";
+import CodeBlock from "./CodeBlock";
 
-export function DocContent() {
+export default function DocContent({ title, content }: { title: string; content: string }) {
+  // Split content into text and code blocks
+  const parts = content.split(/```(.*?)\n([\s\S]*?)```/g);
+
   return (
-    <div className="prose prose-invert max-w-none">
-      <h1>Quickstart</h1>
-
-      <h2>Set up</h2>
-      <p>
-        D3 is written using ES2015 modules. Create a custom bundle using Rollup, Webpack, or your
-        preferred bundler.
-      </p>
-
-      <CodeBlock code="npm install d3" />
-
-      <p>
-        To import D3 into an ES2015 application, either import specific symbols from specific D3
-        modules, or import everything into a namespace.
-      </p>
-
-      <CodeBlock code={`import * as d3 from "d3";`} />
-
-      <h2>In Node</h2>
-      <CodeBlock code={`const d3 = require("d3");`} />
+    <div className="flex-1 p-10 text-white bg-gradient-to-b from-[#1a0133] to-[#0a0133] min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">{title}</h1>
+      <div className="space-y-4 text-lg leading-relaxed">
+        {parts.map((part, i) => {
+          if (i % 3 === 0) {
+            // Normal text
+            return <p key={i}>{part}</p>;
+          } else if (i % 3 === 1) {
+            // Language specifier (bash, js, etc.) → handled in next step
+            return null;
+          } else if (i % 3 === 2) {
+            // Code block
+            const language = parts[i - 1] || "text";
+            return <CodeBlock key={i} code={part.trim()} language={language} />;
+          }
+        })}
+      </div>
     </div>
   );
 }

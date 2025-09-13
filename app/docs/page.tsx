@@ -1,13 +1,25 @@
-import { Sidebar } from "./components/Sidebar";
-import { DocContent } from "./components/DocContent";
+"use client";
+import { useState, useEffect } from "react";
+import Sidebar from "./components/Sidebar";
+import DocContent from "./components/DocContent";
+import sectionsData from "./components/sections.json";
 
 export default function DocsPage() {
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("Quickstart");
+
+  useEffect(() => {
+    // Load Quickstart → Set up by default
+    if (sectionsData["Getting Started"]["Quickstart"]) {
+      const firstItem = sectionsData["Getting Started"]["Quickstart"]["Set up"];
+      setContent(firstItem);
+    }
+  }, []);
+
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-[#0a0020] to-[#1a003c] text-gray-100">
-      <Sidebar />
-      <main className="flex-1 p-8 overflow-y-auto">
-        <DocContent />
-      </main>
+    <div className="flex">
+      <Sidebar onSelect={(content, title) => { setContent(content); setTitle(title); }} />
+      <DocContent title={title} content={content} />
     </div>
   );
 }
