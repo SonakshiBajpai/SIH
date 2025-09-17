@@ -89,7 +89,7 @@ export default function Home() {
         
         {/* Sign Up Link */}
         <div className="text-center mt-6">
-          <span className="text-gray-300">don't have an account? </span>
+          <span className="text-gray-300">don&apos;t have an account? </span>
           <Link href="/signup" className="text-white font-semibold hover:underline">
             Create a account
           </Link>
