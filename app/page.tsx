@@ -1,100 +1,291 @@
-'use client';
+// app/page.tsx
+'use client'; // Required for components with event listeners like <details>
 
 import Link from 'next/link';
+import Image from 'next/image'; // Import the Next.js Image component
+import { ReactNode } from 'react'; // Import ReactNode for typing
+import {
+  ChevronRight,
+  BarChart,
+  Layers,
+  LayoutGrid,
+  Lock,
+  PenTool,
+  Code,
+  Globe,
+  Mail,
+  Phone,
+} from "lucide-react";
 
-export default function Home() {
+// Define types for component props
+type FeatureCardProps = {
+  icon: ReactNode;
+  title: string;
+  description: string;
+};
+
+type FaqItemProps = {
+  question: string;
+  answer: string;
+};
+
+// A reusable component for the feature cards
+const FeatureCard = ({ icon, title, description }: FeatureCardProps) => (
+  <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700/50">
+    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-purple-600/20 text-purple-400 border border-purple-500/30 mb-4">
+      {icon}
+    </div>
+    <h3 className="text-lg font-semibold text-white mb-2">{title}</h3>
+    <p className="text-slate-400 text-sm">{description}</p>
+  </div>
+);
+
+// A reusable component for the FAQ items
+const FaqItem = ({ question, answer }: FaqItemProps) => (
+  <div className="border-b border-slate-700 py-4">
+    <details className="group">
+      <summary className="flex cursor-pointer list-none items-center justify-between font-medium text-white hover:text-purple-400">
+        {question}
+        <ChevronRight className="h-5 w-5 transition-transform duration-300 group-open:rotate-90" />
+      </summary>
+      <p className="mt-2 text-slate-400">{answer}</p>
+    </details>
+  </div>
+);
+
+export default function LandingPage() {
+  const features = [
+    {
+      icon: <BarChart className="h-6 w-6" />,
+      title: "Data Analytics",
+      description:
+        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+    },
+    {
+      icon: <Layers className="h-6 w-6" />,
+      title: "Lead Management",
+      description:
+        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+    },
+    {
+      icon: <Lock className="h-6 w-6" />,
+      title: "Secure Archiving",
+      description:
+        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+    },
+    {
+      icon: <LayoutGrid className="h-6 w-6" />,
+      title: "Custom Dashboards",
+      description:
+        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+    },
+    {
+      icon: <PenTool className="h-6 w-6" />,
+      title: "Editable Templates",
+      description:
+        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+    },
+    {
+      icon: <Code className="h-6 w-6" />,
+      title: "Developer API",
+      description:
+        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/videoplayback.mp4" type="video/mp4" />
-      </video>
-      
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/40"></div>
-      
-      {/* Pink gradient blob */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-pink-500 via-purple-500 to-transparent rounded-full blur-3xl opacity-30"></div>
-      
-      {/* Sign In Form */}
-      <div className="relative z-10 w-full max-w-md mx-auto px-6">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-8">Sign In.</h1>
-        </div>
-        
-        <form className="space-y-6">
-          {/* Email Input */}
-          <div>
-            <input
-              type="email"
-              placeholder="E-mail"
-              className="w-full px-6 py-4 rounded-2xl bg-black/20 backdrop-blur-sm border-2 border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-white/40 focus:bg-black/30 transition-all"
-            />
-          </div>
-          
-          {/* Password Input */}
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full px-6 py-4 rounded-2xl bg-black/20 backdrop-blur-sm border-2 border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-white/40 focus:bg-black/30 transition-all"
-            />
-          </div>
-          
-          {/* OR Divider */}
-          <div className="text-center my-6">
-            <span className="text-white text-lg">or</span>
-          </div>
-          
-          {/* Social Login Buttons */}
-          <div className="space-y-4">
-            <button
-              type="button"
-              className="w-full px-6 py-4 rounded-2xl bg-black/20 backdrop-blur-sm border-2 border-white/20 text-white flex items-center justify-center space-x-3 hover:border-white/40 hover:bg-black/30 transition-all"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-              </svg>
-              <span>Continue with Google</span>
-            </button>
-            
-            <button
-              type="button"
-              className="w-full px-6 py-4 rounded-2xl bg-black/20 backdrop-blur-sm border-2 border-white/20 text-white flex items-center justify-center space-x-3 hover:border-white/40 hover:bg-black/30 transition-all"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-              <span>Continue with Facebook</span>
-            </button>
-          </div>
-          
-          {/* Sign In Button */}
-          <button
-            type="submit"
-            className="w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-purple-500/10 backdrop-blur-sm border-2 border-purple-300/20 text-white font-semibold text-lg hover:from-purple-500/20 hover:via-pink-500/20 hover:to-purple-500/20 hover:border-purple-300/40 transition-all duration-300 mt-8 shadow-lg"
-          >
-            Sign In.
-          </button>
-        </form>
-        
-        {/* Sign Up Link */}
-        <div className="text-center mt-6">
-          <span className="text-gray-300">don&apos;t have an account? </span>
-          <Link href="/signup" className="text-white font-semibold hover:underline">
-            Create a account
-          </Link>
-        </div>
+    <div className="bg-[#0B011D] text-slate-200">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
+        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-purple-600 opacity-20 blur-[100px]"></div>
       </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <header className="flex justify-between items-center py-6">
+          <Link href="/" className="flex items-center">
+            <Globe className="h-8 w-8 text-purple-400 mr-2" />
+            <span className="font-bold text-xl text-white">Product Name</span>
+          </Link>
+          <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+            <Link href="/docs" className="hover:text-purple-400">Documentation</Link>
+            <Link href="/Download" className="hover:text-purple-400">Download</Link>
+            <Link href="/guide" className="hover:text-purple-400">Guide</Link>
+          </nav>
+          <div className="flex items-center space-x-4">
+            <Link href="/signup" passHref>
+              <button className="bg-white/10 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-white/20">
+                Sign Up
+              </button>
+            </Link>
+            <Link href="/signin" passHref>
+               <button className="text-sm font-medium px-4 py-2 text-slate-300">Log in</button>
+            </Link>
+          </div>
+        </header>
+
+        <main>
+          {/* Hero Section */}
+          <section className="text-center pt-20 pb-24">
+            <div className="flex justify-center items-center space-x-2 mb-4">
+              <span className="bg-purple-600/20 text-purple-300 text-xs font-medium px-3 py-1 rounded-full border border-purple-500/30">
+                User-Friendly
+              </span>
+              <span className="bg-purple-600/20 text-purple-300 text-xs font-medium px-3 py-1 rounded-full border border-purple-500/30">
+                Tamper-Proof
+              </span>
+              <span className="bg-purple-600/20 text-purple-300 text-xs font-medium px-3 py-1 rounded-full border border-purple-500/30">
+                Archival
+              </span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
+              Recycle data efficiently and securely
+            </h1>
+            <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-400">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse varius enim in eros elementum tristique. Duis cursus,
+              mi quis viverra ornare, eros dolor.
+            </p>
+            <div className="mt-8 flex justify-center items-center gap-4">
+              <a href="/download-file.zip" download>
+                <button className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-6 py-3 rounded-md hover:opacity-90">
+                  Download for free
+                </button>
+              </a>
+              <Link href="/about">
+                <button className="bg-white/10 text-white font-semibold px-6 py-3 rounded-md hover:bg-white/20">
+                  Learn more about the product
+                </button>
+              </Link>
+            </div>
+
+            {/* Product Image Placeholder */}
+            <div className="mt-16">
+              <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50 shadow-2xl shadow-purple-900/20">
+                <Image 
+                  src="https://i.imgur.com/k6P4IWH.png" 
+                  alt="Product dashboard screenshot" 
+                  className="rounded-lg"
+                  width={1084}
+                  height={644}
+                  priority={true}
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* What is Product Section */}
+          <section className="py-24">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-4xl font-bold text-white">
+                  What is (product name)?
+                </h2>
+              </div>
+              <div>
+                <p className="text-slate-400">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Suspendisse varius enim in eros elementum tristique.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Features Section */}
+          <section className="py-24">
+            <div className="text-left max-w-3xl">
+              <h2 className="text-4xl font-bold text-white">
+                Powerful features to help you manage all your leads
+              </h2>
+              <p className="mt-4 text-slate-400">
+                Aenean sit amet magna nec magna laoreet consequat. Aliquam
+                sodales non ex et sodales. Proin vitae turpis quis ante
+                ultrices mollis. Nulla neque odio, aliquet sed.
+              </p>
+            </div>
+            <div className="mt-12 grid md:grid-cols-3 gap-8">
+              {features.map((feature, index) => (
+                <FeatureCard
+                  key={index}
+                  icon={feature.icon}
+                  title={feature.title}
+                  description={feature.description}
+                />
+              ))}
+            </div>
+          </section>
+
+          {/* FAQ Section */}
+          <section className="py-24">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              <div className="bg-slate-800/50 p-8 rounded-lg border border-slate-700/50 flex items-center justify-center aspect-square">
+                <div className="text-center">
+                  <div className="w-24 h-24 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-4xl font-bold">A</span>
+                  </div>
+                  <p className="text-slate-400">YOUR IMAGE HERE</p>
+                </div>
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold text-white mb-6">FAQs</h2>
+                <div className="space-y-2">
+                  <FaqItem
+                    question="Orci phasellus egestas tellus rutrum?"
+                    answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+                  />
+                  <FaqItem
+                    question="Eu tincidunt tortor aliquam nulla?"
+                    answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+                  />
+                  <FaqItem
+                    question="Cras vitae ac nunc egestas convallis?"
+                    answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+                  />
+                  <FaqItem
+                    question="Semper auctor lobortis id commodo?"
+                    answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="font-semibold text-white">Contact</h3>
+              <ul className="mt-4 space-y-2 text-sm text-slate-400">
+                <li className="flex items-center"><Mail className="h-4 w-4 mr-2" /> info@work@vaultflow.com</li>
+                <li className="flex items-center"><Phone className="h-4 w-4 mr-2" /> (111) 222-3333</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-white">Careers</h3>
+              <ul className="mt-4 space-y-2 text-sm text-slate-400">
+                <li><a href="mailto:careers@example.com" className="hover:text-purple-400">carees@gmail.com</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-white">Social</h3>
+              <ul className="mt-4 space-y-2 text-sm text-slate-400">
+                <li><a href="#" className="hover:text-purple-400">Twitter</a></li>
+                <li><a href="#" className="hover:text-purple-400">Instagram</a></li>
+                <li><a href="#" className="hover:text-purple-400">TikTok</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-12 pt-8 border-t border-slate-800 flex justify-between items-center text-sm text-slate-500">
+            <p>&copy; 2024 Product Name. All Rights Reserved.</p>
+            <div className="flex items-center">
+              <Globe className="h-5 w-5 mr-2" />
+              <span>Product name</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
