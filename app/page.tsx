@@ -1,5 +1,9 @@
 // app/page.tsx
-import Link from 'next/link'; // Import the Link component
+'use client'; // Required for components with event listeners like <details>
+
+import Link from 'next/link';
+import Image from 'next/image'; // Import the Next.js Image component
+import { ReactNode } from 'react'; // Import ReactNode for typing
 import {
   ChevronRight,
   BarChart,
@@ -13,8 +17,20 @@ import {
   Phone,
 } from "lucide-react";
 
+// Define types for component props
+type FeatureCardProps = {
+  icon: ReactNode;
+  title: string;
+  description: string;
+};
+
+type FaqItemProps = {
+  question: string;
+  answer: string;
+};
+
 // A reusable component for the feature cards
-const FeatureCard = ({ icon, title, description }) => (
+const FeatureCard = ({ icon, title, description }: FeatureCardProps) => (
   <div className="bg-slate-800/50 p-6 rounded-lg border border-slate-700/50">
     <div className="flex items-center justify-center h-12 w-12 rounded-md bg-purple-600/20 text-purple-400 border border-purple-500/30 mb-4">
       {icon}
@@ -25,7 +41,7 @@ const FeatureCard = ({ icon, title, description }) => (
 );
 
 // A reusable component for the FAQ items
-const FaqItem = ({ question, answer }) => (
+const FaqItem = ({ question, answer }: FaqItemProps) => (
   <div className="border-b border-slate-700 py-4">
     <details className="group">
       <summary className="flex cursor-pointer list-none items-center justify-between font-medium text-white hover:text-purple-400">
@@ -92,7 +108,7 @@ export default function LandingPage() {
           </Link>
           <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
             <Link href="/docs" className="hover:text-purple-400">Documentation</Link>
-            <Link href="/about" className="hover:text-purple-400">Download</Link>
+            <Link href="/Download" className="hover:text-purple-400">Download</Link>
             <Link href="/guide" className="hover:text-purple-400">Guide</Link>
           </nav>
           <div className="flex items-center space-x-4">
@@ -145,7 +161,14 @@ export default function LandingPage() {
             {/* Product Image Placeholder */}
             <div className="mt-16">
               <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50 shadow-2xl shadow-purple-900/20">
-                <img src="https://i.imgur.com/k6P4IWH.png" alt="Product dashboard screenshot" className="rounded-lg"/>
+                <Image 
+                  src="https://i.imgur.com/k6P4IWH.png" 
+                  alt="Product dashboard screenshot" 
+                  className="rounded-lg"
+                  width={1084}
+                  height={644}
+                  priority={true}
+                />
               </div>
             </div>
           </section>
