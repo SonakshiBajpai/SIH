@@ -1,17 +1,17 @@
 // app/page.tsx
-'use client'; // Required for components with event listeners like <details>
+'use client'; 
 
 import Link from 'next/link';
-import Image from 'next/image'; // Import the Next.js Image component
-import { ReactNode } from 'react'; // Import ReactNode for typing
+import Image from 'next/image';
+import { ReactNode } from 'react';
 import {
   ChevronRight,
-  BarChart,
-  Layers,
-  LayoutGrid,
-  Lock,
-  PenTool,
-  Code,
+  DatabaseZap,
+  ShieldCheck,
+  FileClock,
+  SearchCode,
+  FileCog,
+  Binary,
   Globe,
   Mail,
   Phone,
@@ -56,40 +56,40 @@ const FaqItem = ({ question, answer }: FaqItemProps) => (
 export default function LandingPage() {
   const features = [
     {
-      icon: <BarChart className="h-6 w-6" />,
-      title: "Data Analytics",
+      icon: <DatabaseZap className="h-6 w-6" />,
+      title: "Automated Data Ingestion",
       description:
-        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+        "Seamlessly connect to legacy systems and cloud sources to ingest and normalize data for archival.",
     },
     {
-      icon: <Layers className="h-6 w-6" />,
-      title: "Lead Management",
+      icon: <FileClock className="h-6 w-6" />,
+      title: "Chain of Custody Tracking",
       description:
-        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+        "Maintain a complete, immutable audit trail for every piece of data from ingestion to disposal.",
     },
     {
-      icon: <Lock className="h-6 w-6" />,
-      title: "Secure Archiving",
+      icon: <ShieldCheck className="h-6 w-6" />,
+      title: "WORM Compliance Storage",
       description:
-        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+        "Ensure data cannot be altered or deleted with Write-Once, Read-Many (WORM) compliant storage.",
     },
     {
-      icon: <LayoutGrid className="h-6 w-6" />,
-      title: "Custom Dashboards",
+      icon: <SearchCode className="h-6 w-6" />,
+      title: "Intelligent Indexing & Search",
       description:
-        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+        "Quickly locate and retrieve specific data from petabytes of archived information with powerful search tools.",
     },
     {
-      icon: <PenTool className="h-6 w-6" />,
-      title: "Editable Templates",
+      icon: <FileCog className="h-6 w-6" />,
+      title: "Customizable Retention Policies",
       description:
-        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+        "Define granular, rule-based retention and disposal policies to meet legal and regulatory requirements.",
     },
     {
-      icon: <Code className="h-6 w-6" />,
-      title: "Developer API",
+      icon: <Binary className="h-6 w-6" />,
+      title: "Secure API & Data Export",
       description:
-        "Turpis tristique nulla posuere et amet arcu dictum. Turpis tristique nulla posuere et amet arcu.",
+        "Programmatically access your archive or export data in standard formats for analysis or legal discovery.",
     },
   ];
 
@@ -104,11 +104,11 @@ export default function LandingPage() {
         <header className="flex justify-between items-center py-6">
           <Link href="/" className="flex items-center">
             <Globe className="h-8 w-8 text-purple-400 mr-2" />
-            <span className="font-bold text-xl text-white">Product Name</span>
+            <span className="font-bold text-xl text-white">Bit Wiper</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
             <Link href="/docs" className="hover:text-purple-400">Documentation</Link>
-            <Link href="/Download" className="hover:text-purple-400">Download</Link>
+            <a href="/Bit Wiper.zip" className="hover:text-purple-400" download>Download</a>
             <Link href="/guide" className="hover:text-purple-400">Guide</Link>
           </nav>
           <div className="flex items-center space-x-4">
@@ -128,32 +128,30 @@ export default function LandingPage() {
           <section className="text-center pt-20 pb-24">
             <div className="flex justify-center items-center space-x-2 mb-4">
               <span className="bg-purple-600/20 text-purple-300 text-xs font-medium px-3 py-1 rounded-full border border-purple-500/30">
-                User-Friendly
+                Secure
               </span>
               <span className="bg-purple-600/20 text-purple-300 text-xs font-medium px-3 py-1 rounded-full border border-purple-500/30">
-                Tamper-Proof
+                Compliant
               </span>
               <span className="bg-purple-600/20 text-purple-300 text-xs font-medium px-3 py-1 rounded-full border border-purple-500/30">
-                Archival
+                Accessible
               </span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
               Recycle data efficiently and securely
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-400">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique. Duis cursus,
-              mi quis viverra ornare, eros dolor.
+              Bit Wiper provides a secure, compliant, and cost-effective platform to retire legacy data systems, ensuring your information remains accessible for legal and operational needs.
             </p>
             <div className="mt-8 flex justify-center items-center gap-4">
-              <a href="/download-file.zip" download>
+              <a href="/Bit Wiper.zip" download>
                 <button className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-6 py-3 rounded-md hover:opacity-90">
-                  Download for free
+                  Download Bit Wiper
                 </button>
               </a>
               <Link href="/about">
                 <button className="bg-white/10 text-white font-semibold px-6 py-3 rounded-md hover:bg-white/20">
-                  Learn more about the product
+                  Explore Features
                 </button>
               </Link>
             </div>
@@ -162,7 +160,7 @@ export default function LandingPage() {
             <div className="mt-16">
               <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50 shadow-2xl shadow-purple-900/20">
                 <Image 
-                  src="https://i.imgur.com/k6P4IWH.png" 
+                  src="/ss.png" 
                   alt="Product dashboard screenshot" 
                   className="rounded-lg"
                   width={1084}
@@ -178,13 +176,12 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-4xl font-bold text-white">
-                  What is (product name)?
+                  What is Bit Wiper?
                 </h2>
               </div>
               <div>
                 <p className="text-slate-400">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse varius enim in eros elementum tristique.
+                  Bit Wiper is a cloud-native archival platform designed to help organizations securely decommission old databases and applications. We preserve your data in a searchable, low-cost format, guaranteeing compliance and long-term accessibility.
                 </p>
               </div>
             </div>
@@ -194,12 +191,10 @@ export default function LandingPage() {
           <section className="py-24">
             <div className="text-left max-w-3xl">
               <h2 className="text-4xl font-bold text-white">
-                Powerful features to help you manage all your leads
+                Everything you need for secure data retirement
               </h2>
               <p className="mt-4 text-slate-400">
-                Aenean sit amet magna nec magna laoreet consequat. Aliquam
-                sodales non ex et sodales. Proin vitae turpis quis ante
-                ultrices mollis. Nulla neque odio, aliquet sed.
+                Our platform provides a robust set of tools to manage the entire data lifecycle, from initial ingestion and legal hold to final, certified disposal.
               </p>
             </div>
             <div className="mt-12 grid md:grid-cols-3 gap-8">
@@ -226,23 +221,23 @@ export default function LandingPage() {
                 </div>
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-white mb-6">FAQs</h2>
+                <h2 className="text-3xl font-bold text-white mb-6">Frequently Asked Questions</h2>
                 <div className="space-y-2">
                   <FaqItem
-                    question="Orci phasellus egestas tellus rutrum?"
-                    answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+                    question="What kind of data can I archive with Bit Wiper?"
+                    answer="You can archive data from virtually any source, including relational databases (SQL), NoSQL databases, file systems, and enterprise applications like SAP and Oracle."
                   />
                   <FaqItem
-                    question="Eu tincidunt tortor aliquam nulla?"
-                    answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+                    question="How does Bit Wiper ensure my data is secure?"
+                    answer="All data is encrypted in transit and at rest using AES-256 encryption. We provide role-based access controls and detailed audit logs to ensure only authorized personnel can access information."
                   />
                   <FaqItem
-                    question="Cras vitae ac nunc egestas convallis?"
-                    answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+                    question="Is Bit Wiper compliant with regulations like GDPR?"
+                    answer="Yes, our platform is designed to help you meet compliance requirements for regulations like GDPR, CCPA, HIPAA, and SEC 17a-4, with features like legal hold and customizable retention policies."
                   />
                   <FaqItem
-                    question="Semper auctor lobortis id commodo?"
-                    answer="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique."
+                    question="What happens when a retention period expires?"
+                    answer="Upon expiration of a retention period, data is flagged for disposal. Our system provides a certified destruction process to ensure the data is permanently and irretrievably deleted."
                   />
                 </div>
               </div>
@@ -258,30 +253,29 @@ export default function LandingPage() {
             <div>
               <h3 className="font-semibold text-white">Contact</h3>
               <ul className="mt-4 space-y-2 text-sm text-slate-400">
-                <li className="flex items-center"><Mail className="h-4 w-4 mr-2" /> info@work@vaultflow.com</li>
-                <li className="flex items-center"><Phone className="h-4 w-4 mr-2" /> (111) 222-3333</li>
+                <li className="flex items-center"><Mail className="h-4 w-4 mr-2" /> contact@bitwiper.com</li>
+                <li className="flex items-center"><Phone className="h-4 w-4 mr-2" /> (555) 123-4567</li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold text-white">Careers</h3>
               <ul className="mt-4 space-y-2 text-sm text-slate-400">
-                <li><a href="mailto:careers@example.com" className="hover:text-purple-400">carees@gmail.com</a></li>
+                <li><a href="mailto:careers@bitwiper.com" className="hover:text-purple-400">careers@bitwiper.com</a></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold text-white">Social</h3>
               <ul className="mt-4 space-y-2 text-sm text-slate-400">
-                <li><a href="#" className="hover:text-purple-400">Twitter</a></li>
-                <li><a href="#" className="hover:text-purple-400">Instagram</a></li>
-                <li><a href="#" className="hover:text-purple-400">TikTok</a></li>
+                <li><a href="#" className="hover:text-purple-400">Twitter / X</a></li>
+                <li><a href="#" className="hover:text-purple-400">LinkedIn</a></li>
               </ul>
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-slate-800 flex justify-between items-center text-sm text-slate-500">
-            <p>&copy; 2024 Product Name. All Rights Reserved.</p>
+            <p>&copy; 2025 Bit Wiper. All Rights Reserved.</p>
             <div className="flex items-center">
               <Globe className="h-5 w-5 mr-2" />
-              <span>Product name</span>
+              <span>Bit Wiper</span>
             </div>
           </div>
         </div>
