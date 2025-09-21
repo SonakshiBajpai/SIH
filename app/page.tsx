@@ -104,11 +104,11 @@ export default function LandingPage() {
         <header className="flex justify-between items-center py-6">
           <Link href="/" className="flex items-center">
             <Globe className="h-8 w-8 text-purple-400 mr-2" />
-            <span className="font-bold text-xl text-white">Bit Wiper</span>
+            <span className="font-bold text-xl text-white">Bit Cleaner</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
             <Link href="/docs" className="hover:text-purple-400">Documentation</Link>
-            <a href="/Bit Wiper.zip" className="hover:text-purple-400" download>Download</a>
+            <a href="/Bit Cleaner.zip" className="hover:text-purple-400" download>Download</a>
             <Link href="/guide" className="hover:text-purple-400">Guide</Link>
           </nav>
           <div className="flex items-center space-x-4">
@@ -141,12 +141,12 @@ export default function LandingPage() {
               Recycle data efficiently and securely
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-400">
-              Bit Wiper provides a secure, compliant, and cost-effective platform to retire legacy data systems, ensuring your information remains accessible for legal and operational needs.
+              Bit Cleaner provides a secure, compliant, and cost-effective platform to retire legacy data systems, ensuring your information remains accessible for legal and operational needs.
             </p>
             <div className="mt-8 flex justify-center items-center gap-4">
-              <a href="/Bit Wiper.zip" download>
+              <a href="/Bit Cleaner.zip" download>
                 <button className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-6 py-3 rounded-md hover:opacity-90">
-                  Download Bit Wiper
+                  Download Bit Cleaner
                 </button>
               </a>
               <Link href="/about">
@@ -176,12 +176,12 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-4xl font-bold text-white">
-                  What is Bit Wiper?
+                  What is Bit Cleaner?
                 </h2>
               </div>
               <div>
                 <p className="text-slate-400">
-                  Bit Wiper is a cloud-native archival platform designed to help organizations securely decommission old databases and applications. We preserve your data in a searchable, low-cost format, guaranteeing compliance and long-term accessibility.
+                  Bit Cleaner is a cloud-native archival platform designed to help organizations securely decommission old databases and applications. We preserve your data in a searchable, low-cost format, guaranteeing compliance and long-term accessibility.
                 </p>
               </div>
             </div>
@@ -224,15 +224,15 @@ export default function LandingPage() {
                 <h2 className="text-3xl font-bold text-white mb-6">Frequently Asked Questions</h2>
                 <div className="space-y-2">
                   <FaqItem
-                    question="What kind of data can I archive with Bit Wiper?"
+                    question="What kind of data can I archive with Bit Cleaner?"
                     answer="You can archive data from virtually any source, including relational databases (SQL), NoSQL databases, file systems, and enterprise applications like SAP and Oracle."
                   />
                   <FaqItem
-                    question="How does Bit Wiper ensure my data is secure?"
+                    question="How does Bit Cleaner ensure my data is secure?"
                     answer="All data is encrypted in transit and at rest using AES-256 encryption. We provide role-based access controls and detailed audit logs to ensure only authorized personnel can access information."
                   />
                   <FaqItem
-                    question="Is Bit Wiper compliant with regulations like GDPR?"
+                    question="Is Bit Cleaner compliant with regulations like GDPR?"
                     answer="Yes, our platform is designed to help you meet compliance requirements for regulations like GDPR, CCPA, HIPAA, and SEC 17a-4, with features like legal hold and customizable retention policies."
                   />
                   <FaqItem
@@ -272,10 +272,10 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-slate-800 flex justify-between items-center text-sm text-slate-500">
-            <p>&copy; 2025 Bit Wiper. All Rights Reserved.</p>
+            <p>&copy; 2025 Bit Cleaner. All Rights Reserved.</p>
             <div className="flex items-center">
               <Globe className="h-5 w-5 mr-2" />
-              <span>Bit Wiper</span>
+              <span>Bit Cleaner</span>
             </div>
           </div>
         </div>
