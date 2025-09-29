@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ReactNode } from 'react';
+import UserProfile from './components/UserProfile';
 import {
   ChevronRight,
   DatabaseZap,
@@ -111,16 +112,7 @@ export default function LandingPage() {
             <a href="https://github.com/jagrat04/sih2025/raw/refs/heads/main/code/dist/bit%20cleaner.zip?download=" className="hover:text-purple-400" download>Download</a>
             <Link href="/guide" className="hover:text-purple-400">Guide</Link>
           </nav>
-          <div className="flex items-center space-x-4">
-            <Link href="/signup" passHref>
-              <button className="bg-white/10 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-white/20">
-                Sign Up
-              </button>
-            </Link>
-            <Link href="/signin" passHref>
-               <button className="text-sm font-medium px-4 py-2 text-slate-300">Log in</button>
-            </Link>
-          </div>
+          <UserProfile />
         </header>
 
         <main>
