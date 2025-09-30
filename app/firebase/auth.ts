@@ -30,8 +30,11 @@ export const signUpWithEmailAndPassword = async (
     }
     
     return userCredential;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error('Failed to sign up');
   }
 };
 
@@ -40,8 +43,11 @@ export const signInWithEmailAndPasswordAuth = async (email: string, password: st
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error('Failed to sign in');
   }
 };
 
@@ -50,8 +56,11 @@ export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
     return result;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error('Failed to sign in with Google');
   }
 };
 
@@ -59,8 +68,11 @@ export const signInWithGoogle = async () => {
 export const logOut = async () => {
   try {
     await signOut(auth);
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error('Failed to sign out');
   }
 };
 

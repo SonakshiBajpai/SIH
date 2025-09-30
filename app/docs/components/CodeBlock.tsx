@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Copy } from "lucide-react";
 
-export default function CodeBlock({ code, language }: { code: string; language: string }) {
+export default function CodeBlock({ code, language }: { code: string; language?: string }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -13,7 +13,7 @@ export default function CodeBlock({ code, language }: { code: string; language: 
 
   return (
     <div className="relative bg-[#111827] text-gray-200 rounded-md p-4 my-4 overflow-x-auto">
-      <pre className="text-sm">
+      <pre className="text-sm" data-language={language || undefined}>
         <code>{code}</code>
       </pre>
       <button

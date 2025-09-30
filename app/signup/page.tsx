@@ -38,8 +38,8 @@ export default function SignUp() {
     try {
       await signUpWithEmailAndPassword(email, password, fullName);
       router.push('/'); // Redirect to main page
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Failed to sign up');
     } finally {
       setLoading(false);
     }
@@ -52,8 +52,8 @@ export default function SignUp() {
     try {
       await signInWithGoogle();
       router.push('/'); // Redirect to main page
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Failed to sign up with Google');
     } finally {
       setLoading(false);
     }

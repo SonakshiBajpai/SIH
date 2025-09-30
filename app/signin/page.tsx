@@ -25,8 +25,8 @@ export default function SignIn() {
     try {
       await signInWithEmailAndPasswordAuth(email, password);
       router.push('/'); // Redirect to main page
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Failed to sign in');
     } finally {
       setLoading(false);
     }
@@ -39,8 +39,8 @@ export default function SignIn() {
     try {
       await signInWithGoogle();
       router.push('/'); // Redirect to main page
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Failed to sign in with Google');
     } finally {
       setLoading(false);
     }
