@@ -109,7 +109,7 @@ export default function LandingPage() {
           </Link>
           <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
             <Link href="/docs" className="hover:text-purple-400">Documentation</Link>
-            <a href="https://github.com/jagrat04/sih2025/raw/refs/heads/main/code/dist/bit%20cleaner.zip?download=" className="hover:text-purple-400" download>Download</a>
+            <a href="https://github.com/jagrat04/SIH2025website/raw/refs/heads/main/public/bit%20cleaner.zip?download=" className="hover:text-purple-400" download>Download</a>
             <Link href="/guide" className="hover:text-purple-400">Guide</Link>
           </nav>
           <UserProfile />
@@ -136,7 +136,7 @@ export default function LandingPage() {
               Bit Cleaner provides a secure, compliant, and cost-effective platform to retire legacy data systems, ensuring your information remains accessible for legal and operational needs.
             </p>
             <div className="mt-8 flex justify-center items-center gap-4">
-              <a href="https://github.com/jagrat04/sih2025/raw/refs/heads/main/code/dist/bit%20cleaner.zip?download=" download>
+              <a href="https://github.com/jagrat04/SIH2025website/raw/refs/heads/main/public/bit%20cleaner.zip?download=" download>
                 <button className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold px-6 py-3 rounded-md hover:opacity-90">
                   Download Bit Cleaner
                 </button>
